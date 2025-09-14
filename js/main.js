@@ -26,18 +26,21 @@
     });
     
     
-    // Back to top button
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.back-to-top').fadeIn('slow');
-        } else {
-            $('.back-to-top').fadeOut('slow');
-        }
-    });
-    $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-        return false;
-    });
+   // Back to top button
+$(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+        $('.back-to-top').fadeIn('slow');
+    } else {
+        $('.back-to-top').fadeOut('slow');
+    }
+});
+
+$('.back-to-top').click(function (e) {
+    e.preventDefault(); // prevent default anchor behavior
+    // Scroll immediately with smooth animation
+    $('html, body').stop().animate({scrollTop: 0}, 100, 'swing'); 
+});
+
 
 
     // Testimonials carousel
