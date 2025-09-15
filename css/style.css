@@ -185,13 +185,23 @@ body {
 .courses {
     min-height: 100vh;
     background: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9)),
-                url(../img/campus_1.jpg) center center no-repeat;
+                url(../img/Data\ Center\ 2.webp) center center no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
 .courses-item {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+.courses-item .position-relative img {
+    height: 250px;      /* or any height you prefer */
+    width: 100%;        /* full width of the container */
+    object-fit: cover;  /* maintain aspect ratio, crop if needed */
+    display: block;
+}
+
+
 .courses-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -294,13 +304,13 @@ body {
     width: 20px;
     height: 20px;
     background: transparent;
-    border: 2px solid var(--primary);
+    border: 2px solid #1E40AF;
     transition: .5s;
 }
 .testimonial-carousel .owl-dot.active {
     width: 40px;
     height: 40px;
-    background: var(--primary);
+    background:#1E40AF ;
 }
 .testimonial-carousel .owl-item img {
     width: 150px;
