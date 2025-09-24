@@ -7,8 +7,7 @@
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon" />
+    <link href="img/logo.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -106,35 +105,10 @@
     <!-- Topbar End -->
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-      <a
-        href="index.html"
-        class="navbar-brand d-flex align-items-center px-4 px-lg-5"
-        style="height: 70px; position: relative; overflow: hidden"
-      >
-        <!-- Logo -->
-        <img
-          src="img/Terex logo.jpg"
-          alt="Terex Innovations Lab Logo"
-          style="
-            position: absolute;
-            top: 50%;
-            left: 1;
-            transform: translateY(-50%) scale(1.6);
-            height: auto;
-            max-height: 70px;
-          "
-        />
-        <!-- Company Name -->
-        <span
-          style="
-            margin-left: 90px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e40af;
-          "
-          >Terex Innovations Lab Limited</span
-        >
-      </a>
+      <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5" style="height: 70px;">
+         <img src="img/logo.png" alt="Terex Innovations Lab Logo" style="height: 150%; width: auto;">
+         <span class="d-none d-sm-inline text-nowrap" style="margin-left: 10px; font-size: 1.2rem; font-weight: bold; color: #1E40AF;">Terex Innovations Lab Limited</span>
+    </a>
 
       <button
         type="button"
@@ -257,7 +231,7 @@
         <h6 class="text-primary text-uppercase mb-2">Contact Us</h6>
         <h1 class="display-6 mb-4">If You Have Any Query, Please Contact Us</h1>
 
-        <form>
+        <form id="contactForm">
           <div class="row g-3">
             <div class="col-md-6">
               <div class="form-floating">
@@ -288,6 +262,22 @@
             </div>
           </div>
         </form>
+        <script>
+          document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var subject = document.getElementById('subject').value;
+            var message = document.getElementById('message').value;
+            
+            var mailtoLink = 'mailto:info@terexlab.com'
+              + '?subject=' + encodeURIComponent(subject)
+              + '&body=' + encodeURIComponent('Name: ' + name + '\n\nEmail: ' + email + '\n\nMessage: ' + message);
+            
+            window.location.href = mailtoLink;
+          });
+        </script>
       </div>
     </div>
   </div>
