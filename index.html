@@ -26,6 +26,8 @@
 </head>
 
 <body>
+
+    
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" role="status"></div>
@@ -63,6 +65,21 @@
     text-decoration: none; /* Remove underline */
     line-height: 1;        /* Keep it centered */
 }
+
+
+.payment-option {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.payment-option:hover {
+    border-color: #0d6efd;
+    box-shadow: 0 0 8px rgba(13,110,253,.3);
+}
+.payment-option input:checked + img,
+.payment-option input:checked ~ div {
+    opacity: 1;
+}
+
 </style>
 
 
@@ -512,7 +529,8 @@
                     </div>
 
                     <div class="mt-4">
-                        <a class="btn btn-primary me-3" href="#">Apply Now</a>
+                       <button class="btn btn-primary me-3" id="applyNowBtn">Apply Now</button>
+
                         <a class="btn btn-outline-primary" href="contact.html">Contact Us</a>
                     </div>
 
@@ -669,6 +687,119 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+document.getElementById('applyNowBtn').addEventListener('click', function () {
+    Swal.fire({
+        title: 'Apply for the Training',
+        width: 700,
+        confirmButtonText: 'Proceed to Pay',
+        showCancelButton: true,
+        cancelButtonText: 'Cancel',
+        html: `
+            <form id="applicationForm" class="text-start">
+
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" placeholder="Enter full name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="e.g. 0999 000 000" required>
+                </div>
+
+                <hr>
+                <h6 class="mb-3 text-center">Pay Using</h6>
+
+                <div class="row text-center g-3">
+
+                    <div class="col-4">
+                        <label class="w-100 border rounded p-2 payment-option">
+                            <input type="radio" name="payment" value="Mpamba" class="d-none">
+                            <img src="https://lh3.googleusercontent.com/eWz2ZWA-u40apVFyN2xCGmgQWbEB3QOENR3Q9Jukko_8ZLxi3I-hRUPNE_HDUUpYBe51" alt="Mpamba" class="img-fluid mb-2" style="max-height:50px;">
+                            <div><strong>Mpamba</strong></div>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="w-100 border rounded p-2 payment-option">
+                            <input type="radio" name="payment" value="Airtel Money" class="d-none">
+                            <img src="https://static.vecteezy.com/system/resources/previews/073/494/155/non_2x/airtel-money-circular-logo-glossy-dimensional-finish-free-png.png" alt="Airtel Money" class="img-fluid mb-2" style="max-height:50px;">
+                            <div><strong>Airtel Money</strong></div>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="w-100 border rounded p-2 payment-option">
+                            <input type="radio" name="payment" value="FDH Bank" class="d-none">
+                            <img src="https://play-lh.googleusercontent.com/qmREAOIAAXGM3mM9_fMZbyRUIv2gEmKpmPOsfsA3cXw4LdMbjc9kIz7E9sJ3EzHMstg=w416-h235-rw" alt="FDH Bank" class="img-fluid mb-2" style="max-height:50px;">
+                            <div><strong>FDH Bank</strong></div>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="w-100 border rounded p-2 payment-option">
+                            <input type="radio" name="payment" value="National Bank" class="d-none">
+                            <img src="https://play-lh.googleusercontent.com/24YDPYPZSY1A5APX3qKf8I3k-r6fi6YOSkSCkIv1_lNLNbe0X_usEEkzQQLizEorSWA=s180-rw" alt="National Bank" class="img-fluid mb-2" style="max-height:50px;">
+                            <div><strong>National Bank</strong></div>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label class="w-100 border rounded p-2 payment-option">
+                            <input type="radio" name="payment" value="First Capital Bank" class="d-none">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/First_Capital_Bank_logo.jpg" alt="First Capital Bank" class="img-fluid mb-2" style="max-height:50px;">
+                            <div><strong>First Capital Bank</strong></div>
+                        </label>
+                    </div>
+
+                </div>
+            </form>
+        `,
+        preConfirm: () => {
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const payment = document.querySelector('input[name="payment"]:checked');
+
+            if (!name || !email || !phone || !payment) {
+                Swal.showValidationMessage('Please fill all details and select a payment method');
+                return false;
+            }
+
+            return {
+                name,
+                email,
+                phone,
+                payment: payment.value
+            };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Application Submitted',
+                html: `
+                    <p><strong>Name:</strong> ${result.value.name}</p>
+                    <p><strong>Payment Method:</strong> ${result.value.payment}</p>
+                    <p class="text-muted">You will be contacted with payment instructions.</p>
+                `
+            });
+
+            
+        }
+    });
+});
+</script>
+
 </body>
 
 </html>
