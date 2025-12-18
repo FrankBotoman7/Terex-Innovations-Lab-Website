@@ -36,6 +36,21 @@
 
     <!-- Terex Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
+    <style>
+      /* Our Team Images */
+      .team-img-wrapper {
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .team-img {
+        transition: transform 0.4s ease;
+      }
+
+      .team-img:hover {
+        transform: scale(1.05);
+      }
+    </style>
   </head>
 
   <body>
@@ -362,6 +377,58 @@
     </div>
     <!-- About End -->
 
+    <!-- Our Team Start -->
+    <div class="container-xxl py-6">
+      <div class="container">
+        <!-- Section Header -->
+        <div
+          class="text-center mx-auto mb-5 wow fadeInUp"
+          data-wow-delay="0.1s"
+          style="max-width: 700px"
+        >
+          <h6 class="text-primary text-uppercase mb-2">Our Team</h6>
+          <h1 class="display-6 mb-3">Meet the Innovators Behind Terex</h1>
+          <p>
+            Our strength lies in a passionate team of engineers, designers, and
+            innovators committed to building impactful technology solutions that
+            shape the future.
+          </p>
+        </div>
+
+        <!-- Team Images -->
+        <div class="row g-4 align-items-center">
+          <!-- Left Image -->
+          <div class="col-md-6 wow fadeInLeft" data-wow-delay="0.2s">
+            <div class="team-img-wrapper">
+              <img
+                src="img/team1.jpg"
+                class="img-fluid rounded shadow team-img"
+                alt="Terex Team Member"
+                data-bs-toggle="modal"
+                data-bs-target="#teamModal"
+                data-img="img/team1.jpg"
+              />
+            </div>
+          </div>
+
+          <!-- Right Image -->
+          <div class="col-md-6 wow fadeInRight" data-wow-delay="0.2s">
+            <div class="team-img-wrapper">
+              <img
+                src="img/team2.jpg"
+                class="img-fluid rounded shadow team-img"
+                alt="Terex Team Member"
+                data-bs-toggle="modal"
+                data-bs-target="#teamModal"
+                data-img="img/team2.jpg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Our Team End -->
+
     <!-- Footer Start -->
     <div
       class="container-fluid bg-dark text-light footer my-6 mb-0 py-6 wow fadeIn"
@@ -475,5 +542,31 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <!-- Team Image Modal -->
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0">
+          <div class="modal-body p-0 text-center">
+            <img
+              id="modalImage"
+              src=""
+              class="img-fluid rounded shadow-lg"
+              alt="Full View"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const teamModal = document.getElementById("teamModal");
+      const modalImage = document.getElementById("modalImage");
+
+      teamModal.addEventListener("show.bs.modal", function (event) {
+        const img = event.relatedTarget;
+        const src = img.getAttribute("data-img");
+        modalImage.src = src;
+      });
+    </script>
   </body>
 </html>
